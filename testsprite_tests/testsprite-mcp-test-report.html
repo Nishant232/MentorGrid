@@ -1,0 +1,548 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Markdown Preview</title>
+      <style>
+        body {
+          font-family: sans-serif;
+          padding: 40px;
+          line-height: 1.6;
+          background: #fdfdfd;
+          color: #333;
+        }
+        pre {
+          background: #f4f4f4;
+          padding: 10px;
+          border-radius: 5px;
+          overflow-x: auto;
+        }
+        code {
+          font-family: monospace;
+          background: #eee;
+          padding: 2px 4px;
+        }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+        th, td {
+          border: 1px solid #ccc;
+          padding: 8px 12px;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>TestSprite AI Testing Report(MCP)</h1>
+<hr>
+<h2>1️⃣ Document Metadata</h2>
+<ul>
+<li><strong>Project Name:</strong> growth-mentor-grid</li>
+<li><strong>Version:</strong> 0.0.0</li>
+<li><strong>Date:</strong> 2025-08-29</li>
+<li><strong>Prepared by:</strong> TestSprite AI Team</li>
+</ul>
+<hr>
+<h2>2️⃣ Requirement Validation Summary</h2>
+<h3>Requirement: Search mentors by keyword and filters</h3>
+<ul>
+<li><strong>Description:</strong> SearchPage (frontend UI component) — Verify that mentees can search mentors using keyword, categories, ratings, price filters, and availability windows and receive relevant results.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC001</li>
+<li><strong>Test Name:</strong> Search mentors by keyword and filters</li>
+<li><strong>Test Code:</strong> <a href="./TC001_Search_mentors_by_keyword_and_filters.py">TC001_Search_mentors_by_keyword_and_filters.py</a></li>
+<li><strong>Test Error:</strong> The landing page is empty with no interactive elements or navigation options to proceed with the mentor search and filter verification task. Task cannot be completed.
+Browser Console Logs:
+[ERROR] Failed to load resource: net::ERR_EMPTY_RESPONSE (at http://localhost:8080/node_modules/.vite/deps/chunk-HWMC2YUY.js?v=d5cef3b1:0:0)</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/cb82b0b4-c28b-4478-ae0f-5ab1f7c34c0f</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> The page renders empty; likely asset loading/routing failure.</li>
+</ul>
+<hr>
+<h3>Requirement: View detailed mentor profile information</h3>
+<ul>
+<li><strong>Description:</strong> Homepage and MentorProfilePage (frontend UI components) — Ensure mentees can view complete mentor profile details including bios, expertise tags, prices, session durations, badges, reviews, and live availability.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC002</li>
+<li><strong>Test Name:</strong> View detailed mentor profile information</li>
+<li><strong>Test Code:</strong> <a href="./TC002_View_detailed_mentor_profile_information.py">TC002_View_detailed_mentor_profile_information.py</a></li>
+<li><strong>Test Error:</strong> The homepage is empty with no visible content or interactive elements to perform the required task of searching and selecting a mentor and verifying profile details. Reporting the issue and stopping further actions.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/95db6e02-584a-432e-af05-6ac0a01a5cd3</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> Blank homepage blocks access to profile flows.</li>
+</ul>
+<hr>
+<h3>Requirement: Book a mentor session successfully using credit card</h3>
+<ul>
+<li><strong>Description:</strong> BookingPage (frontend UI component) — Validate mentee can select available time slot, enter booking details, pay with credit card and receive confirmation with calendar invite.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC003</li>
+<li><strong>Test Name:</strong> Book a mentor session successfully using credit card</li>
+<li><strong>Test Code:</strong> <a href="./TC003_Book_a_mentor_session_successfully_using_credit_card.py">TC003_Book_a_mentor_session_successfully_using_credit_card.py</a></li>
+<li><strong>Test Error:</strong> The main page is empty with no interactive elements to proceed with the booking flow. Task cannot be completed.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/eeb1b430-6271-4133-b2a0-2a7d8da3fa56</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> Empty UI blocks booking flow.</li>
+</ul>
+<hr>
+<h3>Requirement: Book a mentor session successfully using credits</h3>
+<ul>
+<li><strong>Description:</strong> BookingPage credits payment flow (frontend UI component) — Validate mentee can use platform credits for payment and complete booking flow with proper confirmations.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC004</li>
+<li><strong>Test Name:</strong> Book a mentor session successfully using credits</li>
+<li><strong>Test Code:</strong> <a href="./TC004_Book_a_mentor_session_successfully_using_credits.py">TC004_Book_a_mentor_session_successfully_using_credits.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Err: Error executing action go_to_url: Page.goto: Timeout 60000ms exceeded. Call log: navigating to http://localhost:8080/, waiting until load</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/360b4a8d-d24a-446e-8ff3-c5d738335d57</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load within timeout.</li>
+</ul>
+<hr>
+<h3>Requirement: Booking time slot conflict prevention</h3>
+<ul>
+<li><strong>Description:</strong> BookingTimeSlotConflictPrevention (frontend UI component) — Verify that booking flow prevents overlapping bookings and shows appropriate errors.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC005</li>
+<li><strong>Test Name:</strong> Booking time slot conflict prevention</li>
+<li><strong>Test Code:</strong> <a href="./TC005_Booking_time_slot_conflict_prevention.py">TC005_Booking_time_slot_conflict_prevention.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. net::ERR_EMPTY_RESPONSE at http://localhost:8080/</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/431293fd-797b-4215-a311-0ae1e3a48511</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> Empty response from root URL.</li>
+</ul>
+<hr>
+<h3>Requirement: Mentor calendar management with weekly templates and exceptions</h3>
+<ul>
+<li><strong>Description:</strong> MentorCalendarManagementPage (frontend UI component) — Validate mentor can create/edit/publish weekly templates and add exceptions.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC006</li>
+<li><strong>Test Name:</strong> Mentor calendar management with weekly templates and exceptions</li>
+<li><strong>Test Code:</strong> <a href="./TC006_Mentor_calendar_management_with_weekly_templates_and_exceptions.py">TC006_Mentor_calendar_management_with_weekly_templates_and_exceptions.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/1cc545df-d423-4a55-8fc9-0dd35671bb36</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: External calendar synchronization prevents double-booking</h3>
+<ul>
+<li><strong>Description:</strong> ExternalCalendarSyncIntegration (frontend UI component) — Confirm external calendar sync updates busy times to block bookings.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC007</li>
+<li><strong>Test Name:</strong> External calendar synchronization prevents double-booking</li>
+<li><strong>Test Code:</strong> <a href="./TC007_External_calendar_synchronization_prevents_double_booking.py">TC007_External_calendar_synchronization_prevents_double_booking.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/939abe1e-dfd0-4249-a35e-aada40d362f8</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Join scheduled video session with full controls</h3>
+<ul>
+<li><strong>Description:</strong> VideoSessionPage with WebRTC (frontend UI component) — Validate join, lobby, chat, screen share, and session controls.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC008</li>
+<li><strong>Test Name:</strong> Join scheduled video session with full controls</li>
+<li><strong>Test Code:</strong> <a href="./TC008_Join_scheduled_video_session_with_full_controls.py">TC008_Join_scheduled_video_session_with_full_controls.py</a></li>
+<li><strong>Test Error:</strong> UI not accessible; CAPTCHA blocked access. WebSocket errors from ws://localhost:8080/. See logs in result.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/997ac9dd-a992-4d12-88b5-59598e3980f9</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> External CAPTCHA and WS failures.</li>
+</ul>
+<hr>
+<h3>Requirement: Post-session feedback submission with moderation</h3>
+<ul>
+<li><strong>Description:</strong> FeedbackSubmissionPage (frontend UI component) — Ensure feedback submission flows and moderation.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC009</li>
+<li><strong>Test Name:</strong> Post-session feedback submission with moderation</li>
+<li><strong>Test Code:</strong> <a href="./TC009_Post_session_feedback_submission_with_moderation.py">TC009_Post_session_feedback_submission_with_moderation.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/60ac320f-6114-486a-a0d1-8db1b3656365</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Mentor and mentee messaging with unread counts and notifications</h3>
+<ul>
+<li><strong>Description:</strong> MessagingComponent (frontend UI component) — Verify threaded conversations, unread counts, notifications.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC010</li>
+<li><strong>Test Name:</strong> Mentor and mentee messaging with unread counts and notifications</li>
+<li><strong>Test Code:</strong> <a href="./TC010_Mentor_and_mentee_messaging_with_unread_counts_and_notifications.py">TC010_Mentor_and_mentee_messaging_with_unread_counts_and_notifications.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/c333e84b-4b3a-4bfc-b1f4-82d94461f10f</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Admin panel user and mentor management</h3>
+<ul>
+<li><strong>Description:</strong> AdminPanelUserManagement (frontend UI component) — Ensure admin approvals and management flows.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC011</li>
+<li><strong>Test Name:</strong> Admin panel user and mentor management</li>
+<li><strong>Test Code:</strong> <a href="./TC011_Admin_panel_user_and_mentor_management.py">TC011_Admin_panel_user_and_mentor_management.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/856056ab-f758-415b-ba1a-1abd8e63624c</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Admin panel refund and payout management</h3>
+<ul>
+<li><strong>Description:</strong> AdminPanelRefundPayoutManagement (frontend UI component) — Ensure refunds and payouts.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC012</li>
+<li><strong>Test Name:</strong> Admin panel refund and payout management</li>
+<li><strong>Test Code:</strong> <a href="./TC012_Admin_panel_refund_and_payout_management.py">TC012_Admin_panel_refund_and_payout_management.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/91c1f8e3-2d73-446d-867c-dc11ad07a0bb</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Admin analytics dashboards and data export</h3>
+<ul>
+<li><strong>Description:</strong> AdminAnalyticsDashboard (frontend UI component) — Verify analytics accuracy and CSV exports.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC013</li>
+<li><strong>Test Name:</strong> Admin analytics dashboards and data export</li>
+<li><strong>Test Code:</strong> <a href="./TC013_Admin_analytics_dashboards_and_data_export.py">TC013_Admin_analytics_dashboards_and_data_export.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/8ab00adc-9bec-4eff-bbef-c6e52f4d6753</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Role-based access control enforcement</h3>
+<ul>
+<li><strong>Description:</strong> RBAC enforcement module (frontend UI component) — Validate RBAC denies unauthorized access.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC014</li>
+<li><strong>Test Name:</strong> Role-based access control enforcement</li>
+<li><strong>Test Code:</strong> <a href="./TC014_Role_based_access_control_enforcement.py">TC014_Role_based_access_control_enforcement.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/c46cc94e-6042-49d4-ad8d-a1939c3976d4</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: GDPR compliance for user data privacy</h3>
+<ul>
+<li><strong>Description:</strong> UserDataPrivacyModule (frontend UI component) — Verify data access/deletion/privacy controls.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC015</li>
+<li><strong>Test Name:</strong> GDPR compliance for user data privacy</li>
+<li><strong>Test Code:</strong> <a href="./TC015_GDPR_compliance_for_user_data_privacy.py">TC015_GDPR_compliance_for_user_data_privacy.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/bbd0c1d3-be5c-418e-8f84-915ba0dca9f4</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Notifications delivery at user action points</h3>
+<ul>
+<li><strong>Description:</strong> NotificationModule (frontend UI component) — Verify notifications/toasts/email triggers.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC016</li>
+<li><strong>Test Name:</strong> Notifications delivery at user action points</li>
+<li><strong>Test Code:</strong> <a href="./TC016_Notifications_delivery_at_user_action_points.py">TC016_Notifications_delivery_at_user_action_points.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/6ae899f9-d83b-4dd2-b7ed-fbbff61adb91</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h3>Requirement: Performance benchmarks under load</h3>
+<ul>
+<li><strong>Description:</strong> PerformanceMonitoring (frontend UI + backend) — Validate p95 load, search latency, uptime.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC017</li>
+<li><strong>Test Name:</strong> Performance benchmarks under load</li>
+<li><strong>Test Code:</strong> <a href="./TC017_Performance_benchmarks_under_load.py">TC017_Performance_benchmarks_under_load.py</a></li>
+<li><strong>Test Error:</strong> UI empty; multiple net::ERR_EMPTY_RESPONSE and external CAPTCHA blocks. See logs.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/440051a6-4f7d-4674-87f8-0e53d3029385</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> No accessible UI; cannot perform benchmarks.</li>
+</ul>
+<hr>
+<h3>Requirement: Timezone-aware booking and calendar display</h3>
+<ul>
+<li><strong>Description:</strong> BookingPage and CalendarDisplay (frontend UI components) — Confirm times adjust to user timezone and invites use correct times.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC018</li>
+<li><strong>Test Name:</strong> Timezone-aware booking and calendar display</li>
+<li><strong>Test Code:</strong> <a href="./TC018_Timezone_aware_booking_and_calendar_display.py">TC018_Timezone_aware_booking_and_calendar_display.py</a></li>
+<li><strong>Test Error:</strong> Pages load empty; multiple net::ERR_EMPTY_RESPONSE on CSS and TSX.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/68445b05-873a-4a40-80f9-24c98199177e</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> Asset loading failures block tests.</li>
+</ul>
+<hr>
+<h3>Requirement: Gamification elements update and display</h3>
+<ul>
+<li><strong>Description:</strong> GamificationDashboard (frontend UI component) — Verify leaderboards, badges, streaks.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC019</li>
+<li><strong>Test Name:</strong> Gamification elements update and display</li>
+<li><strong>Test Code:</strong> <a href="./TC019_Gamification_elements_update_and_display.py">TC019_Gamification_elements_update_and_display.py</a></li>
+<li><strong>Test Error:</strong> Homepage empty; net::ERR_EMPTY_RESPONSE on UI assets.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/bb461ddb-04fb-497f-98f4-dae54bb36d59</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> Empty UI blocks gamification checks.</li>
+</ul>
+<hr>
+<h3>Requirement: Session recording optionality and access control</h3>
+<ul>
+<li><strong>Description:</strong> SessionRecordingControlPanel (frontend UI component) — Verify recording toggles and access control.</li>
+</ul>
+<h4>Test 1</h4>
+<ul>
+<li><strong>Test ID:</strong> TC020</li>
+<li><strong>Test Name:</strong> Session recording optionality and access control</li>
+<li><strong>Test Code:</strong> <a href="./TC020_Session_recording_optionality_and_access_control.py">TC020_Session_recording_optionality_and_access_control.py</a></li>
+<li><strong>Test Error:</strong> Failed to go to the start URL. Timeout 60000ms exceeded.</li>
+<li><strong>Test Visualization and Result:</strong> https://www.testsprite.com/dashboard/mcp/tests/416c36bb-c317-4aea-8616-49ebff8aa8b6/6ceed686-d97c-4e69-ad61-203ebaca9433</li>
+<li><strong>Status:</strong> ❌ Failed</li>
+<li><strong>Severity:</strong> HIGH</li>
+<li><strong>Analysis / Findings:</strong> App did not load.</li>
+</ul>
+<hr>
+<h2>3️⃣ Coverage &amp; Matching Metrics</h2>
+<ul>
+<li><strong>Requirements covered:</strong> 20/20 generated</li>
+<li><strong>Tests passed:</strong> 0</li>
+<li><strong>Tests partial:</strong> 0</li>
+<li><strong>Tests failed:</strong> 20</li>
+<li><strong>Key gaps / risks:</strong>
+<ul>
+<li>Frontend dev server returns empty content or times out at root URL.</li>
+<li>Vite CSS import order error observed; likely blocking full render.</li>
+<li>Asset loading failures (ERR_EMPTY_RESPONSE) across multiple modules.</li>
+<li>WebSocket connection failures for session features when UI inaccessible.</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th style="text-align:right">Total Tests</th>
+<th style="text-align:right">✅ Passed</th>
+<th style="text-align:right">⚠️ Partial</th>
+<th style="text-align:right">❌ Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search mentors by keyword and filters</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>View detailed mentor profile information</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Book with credit card</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Book with credits</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Booking conflict prevention</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Mentor calendar management</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>External calendar synchronization</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Video session</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Post-session feedback</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Messaging</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Admin user/mentor management</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Admin refunds &amp; payouts</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Admin analytics &amp; export</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>RBAC enforcement</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>GDPR compliance</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Performance benchmarks</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Timezone-aware booking &amp; calendar display</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Gamification dashboard</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td>Session recording access control</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+</tr>
+</tbody>
+</table>
+
+    </body>
+    </html>
+  

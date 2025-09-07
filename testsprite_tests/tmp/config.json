@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080",
+  "executionArgs": {
+    "projectName": "growth-mentor-grid",
+    "projectPath": "C:\\Users\\91971\\Desktop\\growth-mentor-grid",
+    "testIds": [],
+    "additionalInstruction": "Please test all the critical functionality including the landing page, navigation, error handling, and ensure the app loads properly without empty page responses. Focus on verifying that the fixes for the date-fns-tz import issues, error boundaries, and CSS styling are working correctly.",
+    "envs": {
+      "API_KEY": "sk-user-4BdSM5vcZd6boJ_tn_gt0BS5BxovSuFECFIYDpr2EEmZ9j35iXl6Vg8TdmiHtwPwb2vziadhlwtoebyxe0Xegt0KQP57yNaUXrmcSD0WBJaut6vkCkU7NqkhhuKca8_FmC0"
+    }
+  },
+  "proxy": "http://2ba52777-a20e-49fe-8367-cf6f85a43049:z7Kfxc4vtYSTRzY1nomh8PmplrOZ4JVE@tun.testsprite.com:8080"
+}

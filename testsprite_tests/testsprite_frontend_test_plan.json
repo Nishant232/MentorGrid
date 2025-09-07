@@ -1,0 +1,449 @@
+[
+  {
+    "id": "TC001",
+    "title": "Mentor Search with Various Filters",
+    "description": "Verify that mentees can search for mentors using multiple filters such as expertise, rating, price, availability, and timezone, and that the results match the filter criteria accurately.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the mentor search page"
+      },
+      {
+        "type": "action",
+        "description": "Apply filter by expertise category"
+      },
+      {
+        "type": "action",
+        "description": "Apply filter by minimum rating"
+      },
+      {
+        "type": "action",
+        "description": "Apply filter by price range"
+      },
+      {
+        "type": "action",
+        "description": "Apply filter by mentor availability in the mentee's timezone"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that search results only display mentors matching all selected filter criteria"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "View Detailed Mentor Profile",
+    "description": "Ensure mentor profiles display all relevant information including bios, expertise tags, experience, pricing, availability slots, badges, and peer reviews.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open a mentor profile from the search results"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the mentor biography is shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify expertise tags and years of experience are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm pricing and available time slots appear correctly"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify badges and peer review section are visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Session Booking Normal Flow",
+    "description": "Test that a mentee can successfully select an available slot, complete payment, and receive booking confirmation and calendar invitation within 5 minutes.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Select an available time slot on a mentor's profile"
+      },
+      {
+        "type": "action",
+        "description": "Enter booking details and proceed to payment"
+      },
+      {
+        "type": "action",
+        "description": "Choose payment method (card or credits) and complete payment"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify booking confirmation is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify calendar invite is sent and added"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Session Booking Slot Conflict Detection",
+    "description": "Ensure the booking system correctly identifies and prevents slot double bookings, considering mentor availability rules and external calendar sync.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Set conflicting booking attempt for a time slot already booked or busy from calendar sync"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the system displays conflict error and prevents booking"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Mentor Availability Management",
+    "description": "Verify that mentors can set weekly availability, add exceptions, and sync their external calendars, and that these settings are reflected in the booking system.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as mentor and open availability settings"
+      },
+      {
+        "type": "action",
+        "description": "Configure weekly availability rules"
+      },
+      {
+        "type": "action",
+        "description": "Add availability exceptions for specific dates or periods"
+      },
+      {
+        "type": "action",
+        "description": "Sync availability with external calendars like Google and Microsoft"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that availability changes and exceptions correctly update and block booking slots"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify external calendar events properly block time slots from booking"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Real-time Messaging and Notifications",
+    "description": "Verify that mentees and mentors can exchange messages in real-time and receive timely notifications for new messages and booking updates.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Send a real-time chat message from mentee to mentor"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm mentor receives the message without delay"
+      },
+      {
+        "type": "action",
+        "description": "Send a message from mentor to mentee"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm mentee receives real-time notification"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Secure Video Session Functionalities",
+    "description": "Confirm the WebRTC video session connects both parties securely and supports chat, notes, screen sharing, and session recording features.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Join a scheduled session as mentee"
+      },
+      {
+        "type": "action",
+        "description": "Join the session as mentor"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify video and audio streams are connected successfully"
+      },
+      {
+        "type": "action",
+        "description": "Test chat message functionality within the session"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm messages appear in real-time"
+      },
+      {
+        "type": "action",
+        "description": "Use screen sharing feature to share screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify screen sharing starts and ends properly"
+      },
+      {
+        "type": "action",
+        "description": "Create and save session notes during call"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm notes are saved and accessible after session"
+      },
+      {
+        "type": "action",
+        "description": "Start and stop session recording"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify recording is saved and accessible post-session"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Post-session Feedback Submission",
+    "description": "Verify that after a session, mentees can submit feedback with ratings and comments, optionally mark comments public or private, and that feedback updates mentor reputation and leaderboards appropriately.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete a session and open feedback form"
+      },
+      {
+        "type": "action",
+        "description": "Submit rating and public comment about the mentor"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify feedback is stored and visible in mentor profile"
+      },
+      {
+        "type": "action",
+        "description": "Submit private comment feedback"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm private comments are not publicly displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify mentor's reputation statistics and leaderboard reflect the new feedback"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Admin Panel User and Mentor Management",
+    "description": "Test that admins can manage users including approvals, rejections, and mentor onboarding steps through the admin panel.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login to admin panel and navigate to user and mentor approval sections"
+      },
+      {
+        "type": "action",
+        "description": "Approve a new mentor application"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify mentor status updates to approved"
+      },
+      {
+        "type": "action",
+        "description": "Reject a mentor or user and provide feedback"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm user or mentor is marked rejected and notified"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Admin Panel Payments and Refund Processing",
+    "description": "Ensure that the admin panel supports viewing payments, processing refunds, and changes reflect correctly in payment records.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open admin payments section"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment and issue a refund"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify refund is processed and payment status updates accordingly"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Admin Panel Analytics and Reports Accuracy",
+    "description": "Verify that analytics dashboards and reports display up-to-date user, booking, and financial data within 24 hours of changes.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Access admin analytics dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify reported metrics reflect actual recent user and booking activity"
+      },
+      {
+        "type": "action",
+        "description": "Export reports and verify correct data is included"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Critical Funnel Event Tracking",
+    "description": "Test that critical funnels such as mentee booking, mentor activation, and session completion events are tracked accurately without significant delay.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Perform a full mentee booking flow"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the booking event is tracked in analytics immediately"
+      },
+      {
+        "type": "action",
+        "description": "Activate mentor account"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm mentor activation event is recorded"
+      },
+      {
+        "type": "action",
+        "description": "Complete a session"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify session completion event tracking"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Security and Privacy Compliance",
+    "description": "Ensure the system complies with security best practices including RBAC, PII protection, GDPR principles, and accessibility standards WCAG 2.1 AA.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt unauthorized access to admin-only pages as a mentee or mentor"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is denied based on role"
+      },
+      {
+        "type": "action",
+        "description": "Check that sensitive user information is masked or protected in UI and API responses"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm no PII is exposed to unauthorized users"
+      },
+      {
+        "type": "action",
+        "description": "Review privacy policy and consent flows for GDPR compliance"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify consent is obtained and can be revoked"
+      },
+      {
+        "type": "action",
+        "description": "Perform accessibility audit for WCAG 2.1 AA on key pages"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm no critical accessibility violations"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Error Boundary and UI Component Graceful Handling",
+    "description": "Test that the application handles errors gracefully using error boundaries and shows professional UI feedback without crashing or leaving users stranded.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate application error or API failure in critical component"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify error boundary catches the error and displays a user-friendly message"
+      },
+      {
+        "type": "action",
+        "description": "Trigger form validation errors and API validation failures"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm error messages and UI cues are shown clearly"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Onboarding Flows for New Users",
+    "description": "Verify that new mentees and mentors complete their respective onboarding flows properly with validation and navigation.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Register as new mentee and proceed through onboarding steps"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm onboarding completes with profile ready for use"
+      },
+      {
+        "type": "action",
+        "description": "Register as new mentor and proceed through onboarding including expertise and availability setup"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify mentor onboarding completion and visibility in search"
+      }
+    ]
+  }
+]

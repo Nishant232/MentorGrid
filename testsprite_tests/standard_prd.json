@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "project": "Growth Mentor Grid",
+    "date": "2025-08-25",
+    "prepared_by": "Product Management Team"
+  },
+  "product_overview": "Growth Mentor Grid is a trusted marketplace platform designed to connect mentees with mentors efficiently. It facilitates easy mentor discovery, scheduling and booking of sessions, secure video meetings, and feedback collection, while providing mentors with tools for availability management, payment processing, and reputation building. The platform also includes a comprehensive admin interface for moderation, analytics, and operational control.",
+  "core_goals": [
+    "Enable mentees to discover, evaluate, and book mentors quickly and effortlessly within 5 minutes.",
+    "Provide mentors with comprehensive tools to manage availability, bookings, payments, and build a strong reputation through feedback and leaderboards.",
+    "Deliver a scalable, reliable, and secure platform supporting sustainable business growth through session fees, subscriptions, and upsells.",
+    "Support admin operations for user moderation, mentor approvals, payments, and comprehensive analytics to monitor health and growth."
+  ],
+  "key_features": [
+    "Robust mentor search and filtering by expertise, rating, price, and availability with timezone awareness.",
+    "Detailed mentor profiles featuring bios, expertise tags, experience, pricing, availability slots, badges, and peer reviews.",
+    "Session booking system with slot selection, conflict checks, multi-payment options (card and credits), and calendar integration.",
+    "Mentor availability management including weekly rules, exceptions, and syncing with external calendars like Google and Microsoft.",
+    "Real-time messaging and notifications between mentees and mentors.",
+    "Secure WebRTC-based video sessions with chat, notes, screen sharing, and session recording capabilities.",
+    "Post-session feedback and reviews supporting ratings, comments, and public/private options.",
+    "Gamification elements including weekly leaderboards, achievement badges, streaks, and awards.",
+    "Admin panel for user and mentor approvals, payment and refund processing, analytics dashboards, reports, and feature flags.",
+    "Comprehensive onboarding flows for new users, tailored for mentees and mentors.",
+    "Error handling mechanisms and professional UI components ensuring smooth user experience.",
+    "Privacy-focused analytics tracking major user events and conversion funnels to enable rapid product iteration."
+  ],
+  "user_flow_summary": [
+    "A mentee lands on the platform, browses or searches mentors filtering by categories, rating, price, or availability, and views detailed profiles.",
+    "The mentee selects a suitable time slot according to their timezone, submits booking details, chooses a payment method, and confirms the session, receiving calendar invites and confirmation notifications.",
+    "Mentors set their weekly availability template, add exceptions, sync external calendars, and manage incoming booking requests, accepting or declining as appropriate.",
+    "Both mentee and mentor join a secure video session room with integrated controls for mic, camera, screen sharing, and chat, with session notes saved during the call.",
+    "Post-session, mentees provide ratings and feedback, optionally making comments public, which contributes to the mentor’s reputation and leaderboard standings.",
+    "Admins monitor and manage users through their dedicated admin panel, handling approvals, payments, refunds, viewing analytics, and exporting reports for operational oversight."
+  ],
+  "validation_criteria": [
+    "A mentee must be able to perform end-to-end mentor search, slot selection, payment, and booking confirmation within 5 minutes.",
+    "Mentors’ availability rules and external calendar sync must prevent double bookings and accurately block busy periods.",
+    "Video sessions must reliably connect both parties with functional controls and save session notes.",
+    "Feedback submissions must be correctly stored, optionally public, and reflected in mentor reputations and leaderboards.",
+    "The admin panel must support user management actions, mentor approvals, payment/refund processing, and display updated analytics within 24 hours.",
+    "Critical product funnels (mentee booking, mentor activation, session completion) must be instrumented and track conversion rates accurately with no significant delays.",
+    "System must comply with security, privacy, and accessibility standards including RBAC, PII protection, GDPR basics, and WCAG 2.1 AA.",
+    "Error boundaries and UI components must handle failures gracefully without compromising user experience."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "React Router",
+      "React Query",
+      "Radix UI",
+      "date-fns",
+      "Lucide React"
+    ],
+    "features": [
+      {
+        "name": "Landing Page Components",
+        "description": "Complete landing page with hero section, categories, testimonials, how it works, and footer",
+        "files": [
+          "src/components/landing/Hero.tsx",
+          "src/components/landing/Categories.tsx",
+          "src/components/landing/Testimonials.tsx",
+          "src/components/landing/HowItWorks.tsx",
+          "src/components/landing/LeaderboardPreview.tsx",
+          "src/components/landing/Footer.tsx"
+        ]
+      },
+      {
+        "name": "User Authentication",
+        "description": "Authentication system with sign in/sign up functionality",
+        "files": [
+          "src/pages/Auth.tsx",
+          "src/integrations/supabase/client.ts"
+        ]
+      },
+      {
+        "name": "Mentor Search and Discovery",
+        "description": "Find mentors with filtering, search, and detailed profiles",
+        "files": [
+          "src/pages/FindMentor.tsx",
+          "src/pages/MentorProfile.tsx",
+          "src/components/mentee/MentorAvailabilityView.tsx"
+        ]
+      },
+      {
+        "name": "Booking System",
+        "description": "Session booking with availability management and calendar integration",
+        "files": [
+          "src/components/mentee/MentorAvailabilityView.tsx",
+          "src/pages/SessionRoom.tsx"
+        ]
+      },
+      {
+        "name": "Dashboard System",
+        "description": "Separate dashboards for mentors and mentees with analytics",
+        "files": [
+          "src/pages/MentorDashboard.tsx",
+          "src/pages/MenteeDashboard.tsx"
+        ]
+      },
+      {
+        "name": "Admin Panel",
+        "description": "Comprehensive admin interface for user management, analytics, and payments",
+        "files": [
+          "src/pages/admin/AdminLayout.tsx",
+          "src/pages/admin/Analytics.tsx",
+          "src/pages/admin/Users.tsx",
+          "src/pages/admin/Approvals.tsx",
+          "src/pages/admin/Payments.tsx",
+          "src/pages/admin/Reports.tsx"
+        ]
+      },
+      {
+        "name": "UI Component Library",
+        "description": "Comprehensive UI component system with enhanced buttons, cards, and form elements",
+        "files": [
+          "src/components/ui/enhanced-button.tsx",
+          "src/components/ui/error-boundary.tsx",
+          "src/components/ui/card.tsx",
+          "src/components/ui/button.tsx",
+          "src/components/ui/toaster.tsx",
+          "src/components/ui/sonner.tsx",
+          "src/components/ui/tooltip.tsx"
+        ]
+      },
+      {
+        "name": "Onboarding System",
+        "description": "User onboarding flow for new mentors and mentees",
+        "files": [
+          "src/pages/Onboarding.tsx",
+          "src/pages/BecomeMentor.tsx"
+        ]
+      },
+      {
+        "name": "Error Handling",
+        "description": "Comprehensive error boundary and error handling system",
+        "files": [
+          "src/components/ui/error-boundary.tsx",
+          "src/main.tsx"
+        ]
+      },
+      {
+        "name": "Styling System",
+        "description": "Professional design system with CSS variables, animations, and responsive design",
+        "files": [
+          "src/index.css",
+          "tailwind.config.ts"
+        ]
+      },
+      {
+        "name": "Routing System",
+        "description": "Client-side routing with React Router for all application pages",
+        "files": [
+          "src/App.tsx",
+          "src/pages/Index.tsx",
+          "src/pages/NotFound.tsx"
+        ]
+      },
+      {
+        "name": "Database Integration",
+        "description": "Supabase integration for real-time data and authentication",
+        "files": [
+          "src/integrations/supabase/client.ts",
+          "supabase/config.toml",
+          "supabase/migrations/"
+        ]
+      },
+      {
+        "name": "Utility Functions",
+        "description": "Helper functions and utilities for the application",
+        "files": [
+          "src/lib/utils.ts",
+          "src/hooks/use-mobile.tsx",
+          "src/hooks/use-toast.ts"
+        ]
+      },
+      {
+        "name": "Build Configuration",
+        "description": "Vite build configuration with optimization and development tools",
+        "files": [
+          "vite.config.ts",
+          "tsconfig.json",
+          "tsconfig.app.json",
+          "package.json"
+        ]
+      }
+    ]
+  }
+}

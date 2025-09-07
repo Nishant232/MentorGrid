@@ -1,0 +1,13 @@
+project_id = "gxcfqevjduvbicawefnl"
+
+[functions.calendar-sync]
+verify_jwt = false
+
+[functions.calendar-oauth-callback]
+verify_jwt = false
+
+[cron]
+jobs = [
+  { name = "calendar-sync", schedule = "*/15 * * * *", endpoint = "/functions/v1/calendar-sync" }
+  ,{ name = "weekly-awards", schedule = "5 0 * * 1", endpoint = "/functions/v1/weekly-awards" }
+]

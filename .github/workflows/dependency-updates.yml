@@ -1,0 +1,96 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run weekly on Monday at 6 AM UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      update_type:
+        description: 'Type of update to perform'
+        required: true
+        default: 'security'
+        type: choice
+        options:
+        - security
+        - minor
+        - major
+
+jobs:
+  dependency-update:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for outdated packages
+        id: check-updates
+        run: |
+          npm outdated --json > outdated.json || echo '{}' > outdated.json
+          echo "outdated=$(cat outdated.json)" >> $GITHUB_OUTPUT
+
+      - name: Update security patches
+        if: github.event.inputs.update_type == 'security' || github.event_name == 'schedule'
+        run: |
+          npm audit fix --force
+          npm update
+
+      - name: Update minor versions
+        if: github.event.inputs.update_type == 'minor'
+        run: |
+          npx npm-check-updates -u --target minor
+          npm install
+
+      - name: Update major versions
+        if: github.event.inputs.update_type == 'major'
+        run: |
+          npx npm-check-updates -u
+          npm install
+
+      - name: Run tests after update
+        run: npm test -- --watchAll=false
+
+      - name: Create Pull Request
+        if: success()
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update dependencies'
+          title: '🔧 Automated dependency updates'
+          body: |
+            This PR contains automated dependency updates.
+            
+            **Update Type:** ${{ github.event.inputs.update_type || 'security' }}
+            **Triggered by:** ${{ github.event_name }}
+            
+            ## Changes
+            - Updated dependencies to latest compatible versions
+            - Security patches applied
+            - All tests passing
+            
+            ## Review Required
+            - [ ] Code review
+            - [ ] Test in staging environment
+            - [ ] Verify no breaking changes
+          branch: dependency-updates
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+            ${{ github.event.inputs.update_type || 'security' }}
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Dependency update failed!"
+          echo "Please check the logs and resolve any issues."

@@ -1,0 +1,147 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "React",
+    "Vite",
+    "Tailwind CSS",
+    "Supabase",
+    "React Router",
+    "React Query",
+    "Radix UI",
+    "date-fns",
+    "Lucide React"
+  ],
+  "features": [
+    {
+      "name": "Landing Page Components",
+      "description": "Complete landing page with hero section, categories, testimonials, how it works, and footer",
+      "files": [
+        "src/components/landing/Hero.tsx",
+        "src/components/landing/Categories.tsx",
+        "src/components/landing/Testimonials.tsx",
+        "src/components/landing/HowItWorks.tsx",
+        "src/components/landing/LeaderboardPreview.tsx",
+        "src/components/landing/Footer.tsx"
+      ]
+    },
+    {
+      "name": "User Authentication",
+      "description": "Authentication system with sign in/sign up functionality",
+      "files": [
+        "src/pages/Auth.tsx",
+        "src/integrations/supabase/client.ts"
+      ]
+    },
+    {
+      "name": "Mentor Search and Discovery",
+      "description": "Find mentors with filtering, search, and detailed profiles",
+      "files": [
+        "src/pages/FindMentor.tsx",
+        "src/pages/MentorProfile.tsx",
+        "src/components/mentee/MentorAvailabilityView.tsx"
+      ]
+    },
+    {
+      "name": "Booking System",
+      "description": "Session booking with availability management and calendar integration",
+      "files": [
+        "src/components/mentee/MentorAvailabilityView.tsx",
+        "src/pages/SessionRoom.tsx"
+      ]
+    },
+    {
+      "name": "Dashboard System",
+      "description": "Separate dashboards for mentors and mentees with analytics",
+      "files": [
+        "src/pages/MentorDashboard.tsx",
+        "src/pages/MenteeDashboard.tsx"
+      ]
+    },
+    {
+      "name": "Admin Panel",
+      "description": "Comprehensive admin interface for user management, analytics, and payments",
+      "files": [
+        "src/pages/admin/AdminLayout.tsx",
+        "src/pages/admin/Analytics.tsx",
+        "src/pages/admin/Users.tsx",
+        "src/pages/admin/Approvals.tsx",
+        "src/pages/admin/Payments.tsx",
+        "src/pages/admin/Reports.tsx"
+      ]
+    },
+    {
+      "name": "UI Component Library",
+      "description": "Comprehensive UI component system with enhanced buttons, cards, and form elements",
+      "files": [
+        "src/components/ui/enhanced-button.tsx",
+        "src/components/ui/error-boundary.tsx",
+        "src/components/ui/card.tsx",
+        "src/components/ui/button.tsx",
+        "src/components/ui/toaster.tsx",
+        "src/components/ui/sonner.tsx",
+        "src/components/ui/tooltip.tsx"
+      ]
+    },
+    {
+      "name": "Onboarding System",
+      "description": "User onboarding flow for new mentors and mentees",
+      "files": [
+        "src/pages/Onboarding.tsx",
+        "src/pages/BecomeMentor.tsx"
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "description": "Comprehensive error boundary and error handling system",
+      "files": [
+        "src/components/ui/error-boundary.tsx",
+        "src/main.tsx"
+      ]
+    },
+    {
+      "name": "Styling System",
+      "description": "Professional design system with CSS variables, animations, and responsive design",
+      "files": [
+        "src/index.css",
+        "tailwind.config.ts"
+      ]
+    },
+    {
+      "name": "Routing System",
+      "description": "Client-side routing with React Router for all application pages",
+      "files": [
+        "src/App.tsx",
+        "src/pages/Index.tsx",
+        "src/pages/NotFound.tsx"
+      ]
+    },
+    {
+      "name": "Database Integration",
+      "description": "Supabase integration for real-time data and authentication",
+      "files": [
+        "src/integrations/supabase/client.ts",
+        "supabase/config.toml",
+        "supabase/migrations/"
+      ]
+    },
+    {
+      "name": "Utility Functions",
+      "description": "Helper functions and utilities for the application",
+      "files": [
+        "src/lib/utils.ts",
+        "src/hooks/use-mobile.tsx",
+        "src/hooks/use-toast.ts"
+      ]
+    },
+    {
+      "name": "Build Configuration",
+      "description": "Vite build configuration with optimization and development tools",
+      "files": [
+        "vite.config.ts",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "package.json"
+      ]
+    }
+  ]
+}
