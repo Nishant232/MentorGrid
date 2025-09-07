@@ -36,14 +36,15 @@ export function MenteeProgress() {
       
       // Fetch user achievements from gamification service
       return GamificationService.getUserAchievements(userId);
-    },
-    onSuccess: (data) => {
-      // If no badge is selected yet, select the first earned badge if available
-      if (!selectedBadge && data && data.length > 0) {
-        setSelectedBadge(data[0].id);
-      }
     }
   });
+
+  // Set selected badge when achievements load
+  useEffect(() => {
+    if (!selectedBadge && userAchievements && userAchievements.length > 0) {
+      setSelectedBadge(userAchievements[0].id);
+    }
+  }, [userAchievements, selectedBadge]);
   
   // Fetch all available achievements
   const { data: allAchievements } = useQuery({
@@ -59,7 +60,7 @@ export function MenteeProgress() {
     totalSessions: userStats.sessions_completed || 0,
     currentStreak: userStats.streak_days || 0,
     totalXP: userStats.total_xp || 0,
-    badges: userAchievements.map(a => ({
+    badges: (userAchievements as any[]).map(a => ({
       code: a.id,
       name: a.name || "",
       description: a.description || "",
@@ -227,8 +228,8 @@ export function MenteeProgress() {
             <CardContent>
               <TooltipProvider>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {allAchievements?.map((achievement) => {
-                    const isEarned = userAchievements?.some(ua => ua.id === achievement.id);
+                  {(allAchievements as any[])?.map((achievement) => {
+                    const isEarned = (userAchievements as any[])?.some(ua => ua.id === achievement.id);
                     const badge = {
                       code: achievement.id,
                       name: achievement.name || "",
@@ -290,16 +291,16 @@ export function MenteeProgress() {
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-semibold">
-                        {allAchievements?.find(a => a.id === selectedBadge)?.name || 'Achievement'}
+                        {(allAchievements as any[])?.find(a => a.id === selectedBadge)?.name || 'Achievement'}
                       </h4>
                       <p className="text-sm text-muted-foreground mb-2">
-                        {allAchievements?.find(a => a.id === selectedBadge)?.description || ''}
+                        {(allAchievements as any[])?.find(a => a.id === selectedBadge)?.description || ''}
                       </p>
                       <div className="flex items-center gap-2">
-                        <Badge variant="secondary">+{allAchievements?.find(a => a.id === selectedBadge)?.xp_reward || 0} XP</Badge>
-                        {userAchievements?.find(a => a.id === selectedBadge)?.earned_at && (
+                        <Badge variant="secondary">+{(allAchievements as any[])?.find(a => a.id === selectedBadge)?.xp_reward || 0} XP</Badge>
+                        {(userAchievements as any[])?.find(a => a.id === selectedBadge)?.earned_at && (
                           <Badge variant="outline" className="text-xs">
-                            Earned on {new Date(userAchievements.find(a => a.id === selectedBadge)?.earned_at).toLocaleDateString()}
+                            Earned on {new Date((userAchievements as any[]).find(a => a.id === selectedBadge)?.earned_at).toLocaleDateString()}
                           </Badge>
                         )}
                       </div>

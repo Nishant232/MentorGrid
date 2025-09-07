@@ -128,28 +128,32 @@ export function Messages() {
           content: "Hi! How can I help you today?",
           sender_id: "mentor",
           timestamp: "10:00 AM",
-          is_mentor: true
+          is_mentor: true,
+          read: true
         },
         {
           id: "2",
           content: "I have a question about the project we discussed last week.",
           sender_id: "mentee",
           timestamp: "10:02 AM",
-          is_mentor: false
+          is_mentor: false,
+          read: true
         },
         {
           id: "3",
           content: "Of course! What would you like to know?",
           sender_id: "mentor",
           timestamp: "10:03 AM",
-          is_mentor: true
+          is_mentor: true,
+          read: true
         },
         {
           id: "4",
           content: "I'm struggling with implementing the authentication flow.",
           sender_id: "mentee",
           timestamp: "10:05 AM",
-          is_mentor: false
+          is_mentor: false,
+          read: false
         }
       ];
 
@@ -181,16 +185,16 @@ export function Messages() {
     newSocket.on('newMessage', (message) => {
       // Update messages when a new message is received
       if (selectedConversation === message.threadId) {
-        queryClient.invalidateQueries(['conversation-messages', selectedConversation]);
+        queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
       }
       
       // Update conversation list to show latest message
-      queryClient.invalidateQueries(['mentee-conversations']);
+      queryClient.invalidateQueries({ queryKey: ['mentee-conversations'] });
     });
 
     newSocket.on('messageRead', ({ messageId }) => {
       // Update message read status
-      queryClient.invalidateQueries(['conversation-messages', selectedConversation]);
+      queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
     });
 
     newSocket.on('typing', ({ userId, threadId }) => {
@@ -264,7 +268,7 @@ export function Messages() {
         });
         
         // Update messages
-        queryClient.invalidateQueries(['conversation-messages', selectedConversation]);
+        queryClient.invalidateQueries({ queryKey: ['conversation-messages', selectedConversation] });
       } else {
         toast({
           title: 'Error',

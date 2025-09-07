@@ -86,11 +86,21 @@ export function ReviewDisplay({ userId, limit = 5, showTitle = true, className, 
           tags: review.tags || []
         })) || [];
 
-        setAllReviews(processedReviews as Review[]);
+        // Type assertion to fix the reviewer property
+        const typedReviews = processedReviews.map(review => ({
+          ...review,
+          reviewer: {
+            id: review.reviewer?.id || '',
+            full_name: review.reviewer?.full_name || 'Anonymous',
+            avatar_url: review.reviewer?.avatar_url || ''
+          }
+        })) as Review[];
+
+        setAllReviews(typedReviews);
         
         // Filter public reviews
-        const publicOnly = processedReviews.filter(review => review.is_public);
-        setPublicReviews(publicOnly as Review[]);
+        const publicOnly = typedReviews.filter(review => review.is_public);
+        setPublicReviews(publicOnly);
 
         // Fetch stats for average rating
         const { data: statsData, error: statsError } = await supabase

@@ -37,6 +37,66 @@ export interface ApiResponse<T> {
 
 const adminService = {
   /**
+   * Update user role
+   */
+  updateUserRole: async (userId: string, newRole: UserRole): Promise<ApiResponse<void>> => {
+    try {
+      const { data, error } = await supabase.rpc('update_user_role_secure', {
+        target_user_id: userId,
+        new_role: newRole,
+        admin_user_id: (await supabase.auth.getUser()).data.user?.id
+      });
+
+      if (error) throw error;
+
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to update user role');
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Failed to update user role'
+      };
+    }
+  },
+
+  /**
+   * Toggle user suspension
+   */
+  toggleUserSuspension: async (userId: string, suspend: boolean, reason?: string): Promise<ApiResponse<void>> => {
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ 
+          is_suspended: suspend,
+          suspension_reason: suspend ? reason : null
+        })
+        .eq('user_id', userId);
+
+      if (error) throw error;
+
+      // Log the action
+      const adminUser = await supabase.auth.getUser();
+      if (adminUser.data.user?.id) {
+        await supabase.from('admin_audit_log').insert({
+          admin_user_id: adminUser.data.user.id,
+          action_type: suspend ? 'user_suspended' : 'user_reinstated',
+          target_user_id: userId,
+          new_value: { suspended: suspend, reason }
+        });
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || `Failed to ${suspend ? 'suspend' : 'reinstate'} user`
+      };
+    }
+  },
+  /**
    * Get pending mentor applications
    */
   getMentorApplications: async (): Promise<ApiResponse<MentorApplication[]>> => {

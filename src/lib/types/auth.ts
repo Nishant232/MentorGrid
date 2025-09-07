@@ -8,6 +8,8 @@ export interface User {
   role: UserRole;
   avatar_url?: string;
   onboarding_completed: boolean;
+  is_suspended?: boolean;
+  suspension_reason?: string;
 }
 
 export interface AuthState {
