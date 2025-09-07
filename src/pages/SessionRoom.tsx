@@ -265,7 +265,7 @@ export default function SessionRoom() {
     } else {
       try {
         // Create screen track
-        screenTrack.current = await AgoraRTC.createScreenVideoTrack();
+        screenTrack.current = await AgoraRTC.createScreenVideoTrack({}, 'auto');
         
         // Unpublish camera track if it exists
         if (localVideoTrack.current) {

@@ -184,12 +184,12 @@ export class GamificationService {
       console.error('Error fetching leaderboard:', error);
       return mockLeaderboard.map((entry, index) => ({
         rank: index + 1,
-        user_id: entry.id,
-        username: entry.name,
-        avatar_url: entry.avatar,
+        user_id: entry.user_id,
+        username: entry.full_name,
+        avatar_url: entry.avatar_url,
         total_xp: entry.xp,
         level: this.calculateLevel(entry.xp),
-        streak_days: 0,
+        streak_days: entry.current_streak_days,
         achievements_count: 0
       }));
     }

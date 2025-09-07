@@ -371,8 +371,11 @@ export type Database = {
           id: string
           is_active: boolean | null
           languages: string[] | null
+          rejection_reason: string | null
           skills: string[] | null
+          status: string | null
           timezone: string | null
+          title: string | null
           updated_at: string
           user_id: string
           years_experience: number | null
@@ -389,8 +392,11 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           languages?: string[] | null
+          rejection_reason?: string | null
           skills?: string[] | null
+          status?: string | null
           timezone?: string | null
+          title?: string | null
           updated_at?: string
           user_id: string
           years_experience?: number | null
@@ -407,13 +413,63 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           languages?: string[] | null
+          rejection_reason?: string | null
           skills?: string[] | null
+          status?: string | null
           timezone?: string | null
+          title?: string | null
           updated_at?: string
           user_id?: string
           years_experience?: number | null
         }
         Relationships: []
+      }
+      payments: {
+        Row: {
+          amount_cents: number
+          booking_id: string
+          created_at: string
+          id: string
+          mentee_id: string
+          mentor_id: string
+          refund_reason: string | null
+          refunded_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          booking_id: string
+          created_at?: string
+          id?: string
+          mentee_id: string
+          mentor_id: string
+          refund_reason?: string | null
+          refunded_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          booking_id?: string
+          created_at?: string
+          id?: string
+          mentee_id?: string
+          mentor_id?: string
+          refund_reason?: string | null
+          refunded_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -422,8 +478,10 @@ export type Database = {
           email: string
           full_name: string
           id: string
+          is_suspended: boolean | null
           onboarding_completed: boolean | null
           role: Database["public"]["Enums"]["app_role"]
+          suspension_reason: string | null
           updated_at: string
           user_id: string
         }
@@ -433,8 +491,10 @@ export type Database = {
           email: string
           full_name: string
           id?: string
+          is_suspended?: boolean | null
           onboarding_completed?: boolean | null
           role?: Database["public"]["Enums"]["app_role"]
+          suspension_reason?: string | null
           updated_at?: string
           user_id: string
         }
@@ -444,8 +504,10 @@ export type Database = {
           email?: string
           full_name?: string
           id?: string
+          is_suspended?: boolean | null
           onboarding_completed?: boolean | null
           role?: Database["public"]["Enums"]["app_role"]
+          suspension_reason?: string | null
           updated_at?: string
           user_id?: string
         }

@@ -33,7 +33,7 @@ const Analytics = () => {
   const fetchAnalytics = async () => {
     try {
       setLoading(true);
-      const response = await adminService.getAnalytics();
+      const response = await adminService.getAnalyticsData();
       
       if (response.success) {
         setAnalytics({

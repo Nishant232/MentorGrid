@@ -27,6 +27,8 @@ export default function FindMentor() {
   const [sortBy, setSortBy] = useState("rating")
   const [categories, setCategories] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [availabilityDate, setAvailabilityDate] = useState<Date | null>(null)
+  const [availabilityTimeOfDay, setAvailabilityTimeOfDay] = useState<string>("any")
 
   const allExpertiseAreas = [
     "Product Management", "Engineering", "Marketing", "Design", 
