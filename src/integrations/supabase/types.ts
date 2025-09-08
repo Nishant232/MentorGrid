@@ -629,6 +629,10 @@ export type Database = {
         }
         Returns: string
       }
+      get_current_user_role: {
+        Args: Record<PropertyKey, never>
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
       get_safe_profile_info: {
         Args: { target_user_id: string }
         Returns: {
@@ -636,6 +640,10 @@ export type Database = {
           full_name: string
           user_id: string
         }[]
+      }
+      is_current_user_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
       is_super_admin: {
         Args: { user_id_param: string }
