@@ -29,6 +29,7 @@ import Reviews from "./pages/dashboard/reviews";
 import Feedback from "./pages/dashboard/feedback";
 import Achievements from "./pages/Achievements";
 import TestAuthFlow from "./pages/test-auth-flow";
+import AuthCallback from "./pages/AuthCallback";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
               {/* Public Routes */}
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/auth-callback" element={<AuthCallback />} />
               <Route path="/find-mentor" element={<FindMentor />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/mentor/:mentorId" element={<MentorProfile />} />

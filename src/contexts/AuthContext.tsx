@@ -126,8 +126,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (!profile.onboarding_completed && currentPath !== '/onboarding') {
         navigate('/onboarding');
-      } else if (profile.onboarding_completed && currentPath === '/auth') {
-        // Redirect to user-specific dashboard
+      } else if (profile.onboarding_completed && (currentPath === '/auth' || currentPath === '/auth-callback')) {
+        // Redirect to user-specific dashboard based on role
         const dashboardPath = profile.role === 'mentor' 
           ? `/mentor-dashboard/${userId}`
           : `/mentee-dashboard/${userId}`;
@@ -180,7 +180,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setState({ ...state, isLoading: true, error: null });
       
-      const redirectUrl = `${window.location.origin}/onboarding`;
+      // Set redirect URL based on role for after email confirmation
+      const redirectUrl = `${window.location.origin}/auth-callback`;
       
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
@@ -197,18 +198,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (signUpError) throw signUpError;
 
       if (data?.user) {
-        // Store initial session data for the new user
+        // If user needs email confirmation
+        if (!data.session) {
+          setState({ ...state, isLoading: false });
+          toast({
+            title: "Check your email!",
+            description: "We've sent you a confirmation link. Please check your email and click the link to verify your account.",
+          });
+          return;
+        }
+
+        // If user is automatically signed in (email confirmation disabled)
         if (data.session) {
           setSession(data.session);
           localStorage.setItem(SESSION_STORAGE_KEYS.USER_ID, data.user.id);
           localStorage.setItem(SESSION_STORAGE_KEYS.USER_ROLE, role);
-          localStorage.setItem(SESSION_STORAGE_KEYS.ONBOARDING_COMPLETED, 'false');
-        }
+          localStorage.setItem(SESSION_STORAGE_KEYS.ONBOARDING_COMPLETED, 'true');
 
-        toast({
-          title: "Account created!",
-          description: "Please check your email to verify your account.",
-        });
+          toast({
+            title: "Account created!",
+            description: "Welcome to MentorConnect!",
+          });
+
+          // Redirect based on role
+          const dashboardPath = role === 'mentor' 
+            ? `/mentor-dashboard/${data.user.id}`
+            : `/mentee-dashboard/${data.user.id}`;
+          navigate(dashboardPath);
+        }
       }
     } catch (error: any) {
       setState({ ...state, error: error.message, isLoading: false });
