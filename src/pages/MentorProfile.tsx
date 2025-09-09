@@ -27,7 +27,24 @@ const MentorProfile = () => {
     queryFn: () => ApiService.getMentorProfile(mentorId || ""),
     enabled: !!mentorId,
   });
+
+  const mentor = mentorData?.data;
   
+  const displayMentor = mentor ? {
+    id: mentor.user_id,
+    name: mentor.profiles?.full_name || "Unknown Mentor",
+    title: mentor.title || "Mentor",
+    bio: mentor.bio || "No bio available",
+    rating: 4.5, // Default rating - could be calculated from reviews
+    sessions: 127, // Default - could be fetched from bookings
+    hourlyRate: Number(mentor.hourly_rate) || 80,
+    skills: mentor.expertise_areas || mentor.skills || [],
+    avatar: mentor.profiles?.avatar_url,
+    email: mentor.profiles?.email,
+    experience: mentor.years_experience,
+    languages: mentor.languages || ['English']
+  } : null;
+
   // Fetch mentor availability stats
   const { data: availabilityStats, isLoading: availabilityLoading } = useQuery({
     queryKey: ["mentor-availability-stats", mentorId],
@@ -45,18 +62,6 @@ const MentorProfile = () => {
     enabled: !!mentorId,
   });
 
-  const mockMentor = {
-    id: mentorId || "mock",
-    name: "Sarah Chen",
-    title: "Sr. Product Manager at Google",
-    rating: 4.9,
-    sessions: 127,
-    hourlyRate: 80,
-    skills: ["Product Strategy", "Leadership", "Career Growth"],
-    avatar: "/placeholder.svg",
-    bio: "Product leader with 10+ years helping teams build impactful products.",
-  };
-
   // Book session mutation
   const bookSession = useMutation({
     mutationFn: async () => {
@@ -68,7 +73,7 @@ const MentorProfile = () => {
         p_mentee_user_id: auth.data.user.id,
         p_start: selectedSlot!.start,
         p_end: selectedSlot!.end,
-        p_price_cents: Math.round((mockMentor.hourlyRate || 50) * 100),
+        p_price_cents: Math.round((displayMentor?.hourlyRate || 50) * 100),
         p_currency: "USD",
         p_notes: sessionNotes,
       } as any);
@@ -156,6 +161,28 @@ const MentorProfile = () => {
     );
   }
 
+  if (!displayMentor) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle>Mentor Not Found</CardTitle>
+                <CardDescription>The mentor profile you're looking for could not be found.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button onClick={() => navigate("/find-mentor")}>
+                  Back to Find Mentors
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {showSuccess && (
@@ -171,35 +198,63 @@ const MentorProfile = () => {
             <Card className="md:col-span-1">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-foreground flex items-center justify-center text-white text-xl font-bold">
-                    {mockMentor.name[0]}
-                  </div>
+                  {displayMentor.avatar ? (
+                    <img 
+                      src={displayMentor.avatar} 
+                      alt={displayMentor.name}
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-foreground flex items-center justify-center text-white text-xl font-bold">
+                      {displayMentor.name[0]}
+                    </div>
+                  )}
                   <div>
-                    <CardTitle>{mockMentor.name}</CardTitle>
-                    <p className="text-muted-foreground text-sm">{mockMentor.title}</p>
+                    <CardTitle>{displayMentor.name}</CardTitle>
+                    <p className="text-muted-foreground text-sm">{displayMentor.title}</p>
                     <div className="flex items-center gap-1 mt-2">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm">{mockMentor.rating}</span>
+                      <span className="text-sm">{displayMentor.rating}</span>
                       <span className="text-muted-foreground text-sm">
-                        ({mockMentor.sessions} sessions)
+                        ({displayMentor.sessions} sessions)
                       </span>
                     </div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm">{mockMentor.bio}</p>
+                <p className="text-sm">{displayMentor.bio}</p>
                 
                 <div>
                   <h4 className="font-medium mb-2">Skills & Expertise</h4>
                   <div className="flex flex-wrap gap-1">
-                    {mockMentor.skills.map((skill) => (
+                    {displayMentor.skills.map((skill) => (
                       <Badge key={skill} variant="secondary" className="text-xs">
                         {skill}
                       </Badge>
                     ))}
                   </div>
                 </div>
+                
+                {displayMentor.languages && displayMentor.languages.length > 0 && (
+                  <div>
+                    <h4 className="font-medium mb-2">Languages</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {displayMentor.languages.map((lang) => (
+                        <Badge key={lang} variant="outline" className="text-xs">
+                          {lang}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {displayMentor.experience && (
+                  <div>
+                    <h4 className="font-medium mb-2">Experience</h4>
+                    <p className="text-sm text-muted-foreground">{displayMentor.experience} years of experience</p>
+                  </div>
+                )}
                 
                 {/* Availability Stats */}
                 {availabilityStats && (
@@ -220,7 +275,7 @@ const MentorProfile = () => {
                       </div>
                       <div className="flex items-center gap-1">
                         <Users className="w-4 h-4 text-muted-foreground" />
-                        <span>{mockMentor.sessions} sessions</span>
+                        <span>{displayMentor.sessions} sessions</span>
                       </div>
                     </div>
                     
@@ -239,7 +294,7 @@ const MentorProfile = () => {
 
                 <div className="flex items-center justify-between pt-4 border-t">
                   <span className="text-muted-foreground">Rate</span>
-                  <span className="font-semibold">${mockMentor.hourlyRate}/hr</span>
+                  <span className="font-semibold">${displayMentor.hourlyRate}/hr</span>
                 </div>
               </CardContent>
             </Card>
@@ -302,7 +357,7 @@ const MentorProfile = () => {
                               disabled={bookSession.isPending}
                               className="flex-1"
                             >
-                              {bookSession.isPending ? "Booking..." : `Book Session - $${mockMentor.hourlyRate}/hr`}
+                              {bookSession.isPending ? "Booking..." : `Book Session - $${displayMentor.hourlyRate}/hr`}
                             </Button>
                           </div>
                         </div>

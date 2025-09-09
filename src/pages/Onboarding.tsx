@@ -7,8 +7,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import RoleSelection from "@/components/onboarding/RoleSelection";
-import MentorProfileForm from "@/components/onboarding/MentorProfileForm";
 import MenteeProfileForm from "@/components/onboarding/MenteeProfileForm";
+import { MentorSetupForm } from "@/components/onboarding/MentorSetupForm";
 
 type OnboardingStep = "role" | "profile";
 type UserRole = "mentor" | "mentee" | null;
@@ -165,30 +165,24 @@ const Onboarding = () => {
           />
         )}
 
-        {currentStep === "profile" && selectedRole && (
+        {currentStep === "profile" && selectedRole === "mentor" && (
+          <MentorSetupForm />
+        )}
+
+        {currentStep === "profile" && selectedRole === "mentee" && (
           <Card>
             <CardHeader>
-              <CardTitle>
-                {selectedRole === "mentor" ? "Mentor" : "Mentee"} Profile Setup
-              </CardTitle>
+              <CardTitle>Mentee Profile Setup</CardTitle>
               <CardDescription>
                 Tell us more about yourself to help create the best connections
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {selectedRole === "mentor" ? (
-                <MentorProfileForm
-                  userId={user.id}
-                  onComplete={handleProfileComplete}
-                  loading={loading}
-                />
-              ) : (
-                <MenteeProfileForm
-                  userId={user.id}
-                  onComplete={handleProfileComplete}
-                  loading={loading}
-                />
-              )}
+            <MenteeProfileForm
+              userId={user.id}
+              onComplete={handleProfileComplete}
+              loading={loading}
+            />
             </CardContent>
           </Card>
         )}

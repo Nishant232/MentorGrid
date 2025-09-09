@@ -35,7 +35,7 @@ export class ApiService {
           .from("mentor_profiles")
           .select(`
             *,
-            profiles!mentor_profiles_user_id_fkey(full_name, avatar_url, email)
+            profiles!inner(full_name, avatar_url, email, user_id)
           `)
           .eq("is_active", true);
 
@@ -45,7 +45,7 @@ export class ApiService {
 
         return await query;
       },
-      mockMentors as any,
+      [] as any, // Return empty array instead of mock data when API fails
       "Failed to fetch mentors"
     );
   }
@@ -102,13 +102,13 @@ export class ApiService {
           .from("mentor_profiles")
           .select(`
             *,
-            profiles!mentor_profiles_user_id_fkey(full_name, avatar_url, email)
+            profiles!inner(full_name, avatar_url, email, user_id)
           `)
           .eq("user_id", mentorId)
           .eq("is_active", true)
-          .single();
+          .maybeSingle();
       },
-      mockMentors.find(m => m.id === mentorId) || mockMentors[0] as any,
+      null as any,
       "Failed to fetch mentor profile"
     );
   }

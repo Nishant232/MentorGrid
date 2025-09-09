@@ -92,7 +92,7 @@ export default function FindMentor() {
       // Search query filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
-        const name = (mentor.full_name || mentor.name || "").toLowerCase()
+        const name = (mentor.profiles?.full_name || "").toLowerCase()
         const bio = (mentor.bio || "").toLowerCase()
         const skills = (mentor.expertise_areas || mentor.skills || []).join(" ").toLowerCase()
         
@@ -133,13 +133,13 @@ export default function FindMentor() {
       }
 
       // Price filter
-      const rate = mentor.hourly_rate || mentor.price || 100
+      const rate = mentor.hourly_rate || 100
       if (rate < priceRange[0] || rate > priceRange[1]) {
         return false
       }
 
-      // Rating filter
-      const rating = mentor.rating || 4.5
+      // Rating filter - using default 4.5 for now since we don't have calculated ratings yet
+      const rating = 4.5
       if (rating < minRating) {
         return false
       }
@@ -153,11 +153,12 @@ export default function FindMentor() {
     return [...filteredMentors].sort((a, b) => {
       switch (sortBy) {
         case "rating":
-          return (b.rating || 4.5) - (a.rating || 4.5)
+          // Default rating since we don't have calculated ratings yet
+          return 4.5 - 4.5
         case "price-low":
-          return (a.hourly_rate || a.price || 100) - (b.hourly_rate || b.price || 100)
+          return (a.hourly_rate || 100) - (b.hourly_rate || 100)
         case "price-high":
-          return (b.hourly_rate || b.price || 100) - (a.hourly_rate || a.price || 100)
+          return (b.hourly_rate || 100) - (a.hourly_rate || 100)
         case "experience":
           return (b.years_experience || 5) - (a.years_experience || 5)
         default:
@@ -361,20 +362,20 @@ export default function FindMentor() {
                 </div>
               ) : (
                 sortedMentors.map((mentor) => (
-                <Card key={mentor.id} className="hover:shadow-medium transition-all cursor-pointer" onClick={() => navigate(`/mentor/${mentor.id}`)}>
+                <Card key={mentor.id} className="hover:shadow-medium transition-all cursor-pointer" onClick={() => navigate(`/mentor/${mentor.user_id}`)}>
                   <CardHeader className="pb-4">
                     <div className="flex items-start gap-4">
                       <Avatar className="w-16 h-16">
-                        <AvatarImage src={mentor.avatar_url || mentor.avatar} alt={mentor.full_name || mentor.name} />
-                        <AvatarFallback>{(mentor.full_name || mentor.name || '').split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
+                        <AvatarImage src={mentor.profiles?.avatar_url} alt={mentor.profiles?.full_name || 'Mentor'} />
+                        <AvatarFallback>{(mentor.profiles?.full_name || '').split(' ').map((n: string) => n[0]).join('')}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-lg text-card-foreground">{mentor.full_name || mentor.name}</h3>
+                        <h3 className="font-semibold text-lg text-card-foreground">{mentor.profiles?.full_name || 'Unknown Mentor'}</h3>
                         <p className="text-muted-foreground text-sm line-clamp-2">{mentor.bio || mentor.title}</p>
                         <div className="flex items-center gap-1 mt-1">
                           <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                          <span className="text-sm font-medium">{mentor.rating || 4.5}</span>
-                          <span className="text-muted-foreground text-sm">({mentor.xp || 100} XP)</span>
+                          <span className="text-sm font-medium">4.5</span>
+                          <span className="text-muted-foreground text-sm">({mentor.years_experience || 5} years exp)</span>
                         </div>
                       </div>
                     </div>
@@ -395,9 +396,9 @@ export default function FindMentor() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <DollarSign className="w-4 h-4" />
-                        <span className="font-semibold text-foreground">${mentor.hourly_rate || mentor.price || 100}/hour</span>
+                        <span className="font-semibold text-foreground">${mentor.hourly_rate || 100}/hour</span>
                       </div>
-                      <EnhancedButton size="sm" variant="premium" onClick={(e) => { e.stopPropagation(); navigate(`/mentor/${mentor.id}`) }}>
+                      <EnhancedButton size="sm" variant="premium" onClick={(e) => { e.stopPropagation(); navigate(`/mentor/${mentor.user_id}`) }}>
                         Book Session
                       </EnhancedButton>
                     </div>
