@@ -1,11 +1,8 @@
 import { ArrowLeft, CheckCircle, Users, DollarSign, Calendar, Star } from "lucide-react"
-import { EnhancedButton } from "@/components/ui/enhanced-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router-dom"
+import { MentorApplicationForm } from "@/components/mentor/MentorApplicationForm"
 
 const benefits = [
   {
@@ -139,62 +136,7 @@ export default function BecomeMentor() {
               </div>
 
               {/* Application Form */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Apply to Become a Mentor</CardTitle>
-                  <p className="text-muted-foreground">Fill out this form and we'll review your application within 2-3 business days.</p>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="John" />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Doe" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="company">Current Company & Role</Label>
-                    <Input id="company" placeholder="Senior Engineer at Google" />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="experience">Years of Experience</Label>
-                    <Input id="experience" type="number" placeholder="5" />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="expertise">Areas of Expertise</Label>
-                    <Input id="expertise" placeholder="React, Node.js, System Design..." />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="rate">Preferred Hourly Rate ($)</Label>
-                    <Input id="rate" type="number" placeholder="120" />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="bio">Tell us about yourself</Label>
-                    <Textarea 
-                      id="bio" 
-                      placeholder="Share your background, why you want to mentor, and what unique value you can provide to mentees..."
-                      rows={4}
-                    />
-                  </div>
-
-                  <EnhancedButton className="w-full" size="lg" variant="hero">
-                    Submit Application
-                  </EnhancedButton>
-                </CardContent>
-              </Card>
+              <MentorApplicationForm />
             </div>
           </div>
         </div>

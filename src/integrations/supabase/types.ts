@@ -362,64 +362,82 @@ export type Database = {
         Row: {
           availability: Json | null
           bio: string | null
+          certificates: Json | null
           certifications: string[] | null
           created_at: string
           currency: string | null
+          detailed_bio: string | null
           education: string | null
           expertise_areas: string[] | null
           hourly_rate: number | null
           id: string
           is_active: boolean | null
           languages: string[] | null
+          profile_picture_url: string | null
+          recent_job_roles: Json | null
           rejection_reason: string | null
           skills: string[] | null
+          social_media_links: Json | null
           status: string | null
           timezone: string | null
           title: string | null
           updated_at: string
           user_id: string
+          work_experience: Json | null
           years_experience: number | null
         }
         Insert: {
           availability?: Json | null
           bio?: string | null
+          certificates?: Json | null
           certifications?: string[] | null
           created_at?: string
           currency?: string | null
+          detailed_bio?: string | null
           education?: string | null
           expertise_areas?: string[] | null
           hourly_rate?: number | null
           id?: string
           is_active?: boolean | null
           languages?: string[] | null
+          profile_picture_url?: string | null
+          recent_job_roles?: Json | null
           rejection_reason?: string | null
           skills?: string[] | null
+          social_media_links?: Json | null
           status?: string | null
           timezone?: string | null
           title?: string | null
           updated_at?: string
           user_id: string
+          work_experience?: Json | null
           years_experience?: number | null
         }
         Update: {
           availability?: Json | null
           bio?: string | null
+          certificates?: Json | null
           certifications?: string[] | null
           created_at?: string
           currency?: string | null
+          detailed_bio?: string | null
           education?: string | null
           expertise_areas?: string[] | null
           hourly_rate?: number | null
           id?: string
           is_active?: boolean | null
           languages?: string[] | null
+          profile_picture_url?: string | null
+          recent_job_roles?: Json | null
           rejection_reason?: string | null
           skills?: string[] | null
+          social_media_links?: Json | null
           status?: string | null
           timezone?: string | null
           title?: string | null
           updated_at?: string
           user_id?: string
+          work_experience?: Json | null
           years_experience?: number | null
         }
         Relationships: []
