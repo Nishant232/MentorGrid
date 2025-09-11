@@ -26,6 +26,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AvailabilityManager } from "@/components/mentor/AvailabilityManager";
 import { CalendarSync } from "@/components/mentor/CalendarSync";
 import { CalendarView } from "@/components/mentor/CalendarView";
+import { MentorProfileSettings } from "@/components/mentor/MentorProfileSettings";
 import { useAuth } from "@/hooks/useAuth";
 
 const MentorDashboard = () => {
@@ -108,7 +109,7 @@ const MentorDashboard = () => {
         <div className="p-6 border-b border-border">
           <div className="flex items-center gap-3 mb-4">
             <Avatar className="h-12 w-12">
-              <AvatarImage src={mentorData?.profile?.avatar_url} />
+              <AvatarImage src={mentorData?.mentorProfile?.profile_picture_url || mentorData?.profile?.avatar_url} />
               <AvatarFallback className="bg-primary text-primary-foreground">
                 {mentorData?.profile?.full_name?.[0] || "M"}
               </AvatarFallback>
@@ -117,7 +118,9 @@ const MentorDashboard = () => {
               <h3 className="font-semibold text-foreground">
                 {mentorData?.profile?.full_name || "Mentor"}
               </h3>
-              <p className="text-sm text-muted-foreground">Mentor</p>
+              <p className="text-sm text-muted-foreground">
+                {mentorData?.mentorProfile?.title || "Mentor"}
+              </p>
             </div>
           </div>
         </div>
@@ -506,56 +509,7 @@ const MentorDashboard = () => {
           {activeTab === "settings" && (
             <div className="space-y-6">
               <h1 className="text-3xl font-bold">Settings</h1>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Profile Settings</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium">Full Name</label>
-                      <input 
-                        type="text" 
-                        className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        defaultValue={mentorData?.profile?.full_name || ""}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="text-sm font-medium">Email</label>
-                      <input 
-                        type="email" 
-                        className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        defaultValue={mentorData?.profile?.email || ""}
-                      />
-                    </div>
-                    
-                    <div className="md:col-span-2">
-                      <label className="text-sm font-medium">Bio</label>
-                      <textarea 
-                        className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        rows={4}
-                        defaultValue={mentorData?.mentorProfile?.bio || ""}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="text-sm font-medium">Hourly Rate ($)</label>
-                      <input 
-                        type="number" 
-                        className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        defaultValue={mentorData?.mentorProfile?.hourly_rate || ""}
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-4 pt-4">
-                    <Button className="bg-success hover:bg-success/90">Save Changes</Button>
-                    <Button variant="destructive">Logout</Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <MentorProfileSettings />
             </div>
           )}
         </div>

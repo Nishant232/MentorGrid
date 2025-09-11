@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const commonExpertiseAreas = [
   "Product Management", "Software Engineering", "Data Science", "Design", 
@@ -43,11 +44,12 @@ interface JobRole {
 export function MentorApplicationForm() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
   
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: user?.email || "",
     title: "",
     bio: "",
     detailedBio: "",
@@ -181,6 +183,11 @@ export function MentorApplicationForm() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      // Email matching validation
+      if (formData.email !== user.email) {
+        throw new Error("Email must match your account email (" + user.email + ")");
+      }
+
       // Upload profile picture
       let profilePictureUrl = null;
       if (profilePicture) {
@@ -306,7 +313,11 @@ export function MentorApplicationForm() {
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 required
+                placeholder="Must match your account email"
               />
+              <p className="text-sm text-muted-foreground mt-1">
+                This must match the email you used to sign up
+              </p>
             </div>
 
             <div>
