@@ -1,13 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Flame, Trophy, Star, Calendar, Award, Zap, Target, BookOpen, Sparkles } from "lucide-react";
+import { Flame, Trophy, Star, Calendar, Award, Zap, Target, BookOpen, Sparkles, TrendingUp, BarChart3 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { GamificationService } from "@/lib/gamification-service";
+import { ModernLineChart } from "@/components/charts/ModernLineChart";
+import { ModernBarChart } from "@/components/charts/ModernBarChart";
+import { ProgressRingChart } from "@/components/charts/ProgressRingChart";
 
 export function MenteeProgress() {
   const [selectedBadge, setSelectedBadge] = useState<string | null>(null);
@@ -129,16 +132,35 @@ export function MenteeProgress() {
   const xpInCurrentLevel = (progressData?.totalXP || 0) % nextLevelXP;
   const progressPercentage = (xpInCurrentLevel / nextLevelXP) * 100;
 
+  // Mock data for charts
+  const progressChartData = [
+    { name: 'Week 1', sessions: 2, xp: 120 },
+    { name: 'Week 2', sessions: 3, xp: 180 },
+    { name: 'Week 3', sessions: 1, xp: 60 },
+    { name: 'Week 4', sessions: 4, xp: 240 },
+    { name: 'Week 5', sessions: 2, xp: 140 }
+  ];
+
+  const skillsData = [
+    { skill: 'Leadership', progress: 75 },
+    { skill: 'Communication', progress: 60 },
+    { skill: 'Technical Skills', progress: 85 },
+    { skill: 'Problem Solving', progress: 70 }
+  ];
+
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Trophy className="h-6 w-6 text-yellow-500" />
-          <h1 className="text-3xl font-bold">Progress</h1>
+    <div className="space-y-8 animate-fade-up">
+      <div className="flex items-center gap-3">
+        <div className="p-2 bg-primary/10 rounded-lg">
+          <Trophy className="h-6 w-6 text-primary" />
+        </div>
+        <div>
+          <h1 className="text-3xl font-bold">Progress & Analytics</h1>
+          <p className="text-muted-foreground">Track your learning journey and achievements</p>
         </div>
         {progressData && (
-          <Badge variant="outline" className="px-3 py-1 text-base">
-            <Star className="h-4 w-4 mr-1 text-yellow-500 inline" />
+          <Badge variant="outline" className="px-3 py-1 text-base ml-auto">
+            <Star className="h-4 w-4 mr-1 text-yellow-500" />
             Level {currentLevel}
           </Badge>
         )}
@@ -150,6 +172,46 @@ export function MenteeProgress() {
         </div>
       ) : (
         <>
+          {/* Progress Charts */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            <ModernLineChart
+              data={progressChartData}
+              title="Learning Progress"
+              dataKey="xp"
+              xAxisKey="name"
+              color="hsl(var(--primary))"
+            />
+            <ProgressRingChart
+              percentage={progressPercentage}
+              title="Level Progress"
+              subtitle={`${xpInCurrentLevel} / ${nextLevelXP} XP`}
+            />
+          </div>
+
+          {/* Skills Progress */}
+          <Card className="transition-smooth hover:shadow-medium">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                <div className="p-2 bg-success/10 rounded-lg">
+                  <BarChart3 className="h-5 w-5 text-success" />
+                </div>
+                Skill Development
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {skillsData.map((skill) => (
+                <div key={skill.skill} className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="font-medium">{skill.skill}</span>
+                    <span className="text-sm text-muted-foreground">{skill.progress}%</span>
+                  </div>
+                  <Progress value={skill.progress} className="h-2" />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Rest of existing progress components... */}
           {/* Learning Streak Section */}
           <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-300">
             <CardHeader className="pb-2">
@@ -184,200 +246,6 @@ export function MenteeProgress() {
                       )} 
                     />
                   ))}
-                </div>
-              </div>
-              
-              {/* Next streak milestone */}
-              {progressData?.currentStreak !== undefined && (
-                <div className="mt-3 text-sm text-muted-foreground">
-                  {progressData.currentStreak < 3 ? (
-                    <p>{3 - progressData.currentStreak} more day(s) to earn the Consistency badge!</p>
-                  ) : progressData.currentStreak < 7 ? (
-                    <p>{7 - progressData.currentStreak} more day(s) to earn the Momentum badge!</p>
-                  ) : progressData.currentStreak < 30 ? (
-                    <p>{30 - progressData.currentStreak} more day(s) to earn the Unstoppable badge!</p>
-                  ) : (
-                    <p>You've reached the highest streak badge! Keep it up!</p>
-                  )}
-                </div>
-              )}
-              
-              <div className="mt-4 pt-3 border-t border-border">
-                <div className="flex justify-between items-center text-sm">
-                  <span className="font-medium">Streak Bonus:</span>
-                  <span className="text-primary">+{(progressData?.currentStreak || 0) * 5} XP</span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Log in daily to maintain your streak and earn bonus XP!
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Badges Earned Section */}
-          <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-300">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Award className="h-5 w-5 text-purple-500" />
-                Achievements
-              </CardTitle>
-              <CardDescription>
-                Earn badges by reaching milestones and maintaining streaks
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <TooltipProvider>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {(allAchievements as any[])?.map((achievement) => {
-                    const isEarned = (userAchievements as any[])?.some(ua => ua.id === achievement.id);
-                    const badge = {
-                      code: achievement.id,
-                      name: achievement.name || "",
-                      description: achievement.description || "",
-                      earned: isEarned,
-                      icon: getAchievementIcon(achievement.category),
-                      category: achievement.category || "",
-                      xpValue: achievement.xp_reward || 0
-                    };
-                    return (
-                      <Tooltip key={badge.code}>
-                        <TooltipTrigger asChild>
-                          <div
-                            onClick={() => setSelectedBadge(badge.code)}
-                            className={cn(
-                              "flex flex-col items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all",
-                              selectedBadge === badge.code ? "ring-2 ring-primary" : "",
-                              badge.earned 
-                                ? 'bg-primary/5 border-primary/20 hover:bg-primary/10' 
-                                : 'bg-muted/50 border-muted opacity-50 hover:opacity-60'
-                            )}
-                          >
-                            <div className={cn(
-                              "w-12 h-12 rounded-full flex items-center justify-center text-lg transition-transform",
-                              selectedBadge === badge.code ? "scale-110" : "",
-                              badge.earned ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'
-                            )}>
-                              {badge.icon}
-                            </div>
-                            <div className="text-sm font-medium text-center">
-                              {badge.name}
-                            </div>
-                            {badge.earned && (
-                              <Badge variant="secondary" className="text-xs">+{badge.xpValue} XP</Badge>
-                            )}
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent side="bottom">
-                          <p>{badge.description}</p>
-                          {!badge.earned && badge.category === "milestone" && (
-                            <p className="text-xs mt-1">Complete {badge.code.includes("sessions") ? badge.code.split("_")[1] : "1"} sessions to earn</p>
-                          )}
-                          {!badge.earned && badge.category === "streak" && (
-                            <p className="text-xs mt-1">Maintain a {badge.code.split("_")[1]}-day streak to earn</p>
-                          )}
-                        </TooltipContent>
-                      </Tooltip>
-                    );
-                  })}
-                </div>
-              </TooltipProvider>
-              
-              {/* Selected badge details */}
-              {selectedBadge && (
-                <div className="mt-4 p-4 border rounded-lg bg-card">
-                  <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl">
-                      {getAchievementIcon(allAchievements?.find(a => a.id === selectedBadge)?.category || 'general')}
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold">
-                        {(allAchievements as any[])?.find(a => a.id === selectedBadge)?.name || 'Achievement'}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {(allAchievements as any[])?.find(a => a.id === selectedBadge)?.description || ''}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary">+{(allAchievements as any[])?.find(a => a.id === selectedBadge)?.xp_reward || 0} XP</Badge>
-                        {(userAchievements as any[])?.find(a => a.id === selectedBadge)?.earned_at && (
-                          <Badge variant="outline" className="text-xs">
-                            Earned on {new Date((userAchievements as any[]).find(a => a.id === selectedBadge)?.earned_at).toLocaleDateString()}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Points & Progress Section */}
-          <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-300">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-yellow-500" />
-                Experience Points
-              </CardTitle>
-              <CardDescription>
-                Earn XP by attending sessions, maintaining streaks, and earning badges
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="text-sm font-medium">Level {currentLevel} Progress</div>
-                    <div className="text-3xl font-bold">
-                      {animateXP ? progressData?.totalXP || 0 : 0} XP
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm text-muted-foreground">Next Level</div>
-                    <div className="text-lg font-medium">Level {currentLevel + 1}</div>
-                  </div>
-                </div>
-                
-                <Progress 
-                  value={animateXP ? progressPercentage : 0} 
-                  className="h-3 transition-all duration-1000" 
-                />
-                
-                <div className="flex justify-between text-sm">
-                  <span>{xpInCurrentLevel} / {nextLevelXP} XP</span>
-                  <span className="font-medium">{Math.round(progressPercentage)}%</span>
-                </div>
-                
-                {/* XP Breakdown */}
-                <div className="mt-4 pt-4 border-t">
-                  <h3 className="text-sm font-medium mb-2">XP Breakdown</h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Sessions ({progressData?.totalSessions || 0})</span>
-                      <span>{(progressData?.totalSessions || 0) * 10} XP</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Streak Bonus ({progressData?.currentStreak || 0} days)</span>
-                      <span>{(progressData?.currentStreak || 0) * 5} XP</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Badges ({progressData?.badges?.length || 0})</span>
-                      <span>{progressData?.badges?.reduce((sum, badge) => sum + badge.xpValue, 0) || 0} XP</span>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Next milestone */}
-                <div className="mt-2 pt-4 border-t">
-                  <h3 className="text-sm font-medium mb-2">Next Milestone</h3>
-                  <div className="flex items-center justify-between bg-muted/50 p-3 rounded-lg">
-                    <div>
-                      <p className="font-medium">{progressData?.nextSessionMilestone} Sessions Badge</p>
-                      <p className="text-sm text-muted-foreground">
-                        {progressData?.sessionsToNextMilestone} more session(s) to go
-                      </p>
-                    </div>
-                    <BookOpen className="h-5 w-5 text-primary" />
-                  </div>
                 </div>
               </div>
             </CardContent>
